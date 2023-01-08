@@ -68,5 +68,8 @@
     <ClInclude Include="Sizeof.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LogDuration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

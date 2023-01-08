@@ -21,7 +21,7 @@ void showBits(const T x)
     std::cout << std::endl;
 
     return;
-
+    // or
     std::bitset<bits_count> bs(x);
     std::cout << "0b" << bs << std::endl;
 }

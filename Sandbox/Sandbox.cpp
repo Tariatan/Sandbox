@@ -17,6 +17,7 @@
 #include "Multithreading.h"
 #include "Bits.h"
 #include "Sizeof.h"
+#include "LogDuration.h"
 
 #include <sstream>
 #include <iostream>
@@ -31,7 +32,6 @@
 #include <numeric>
 
 using namespace std;
-
 
 void sort(int ar[], int size)
 {
@@ -415,6 +415,7 @@ int sum(const std::vector<int>& v)
     return std::accumulate(v.begin(), v.end(), 0);
 }
 
+// String to int
 string timeConvertor(string s)
 {
     //string s = "12:05:45AM";
@@ -674,8 +675,29 @@ int beautifulDays(int i, int j, int k)
     return count;
 }
 
-int main()
+void logDuration()
 {
+    std::vector<int> v;
+    v.reserve(1000000);
+    {
+        LOG_DURATION("push_back");
+        for (int i = 0; i < 1000000; ++i)
+        {
+            v.push_back(i);
+        }
+    }
+}
+
+// Literal operator must have a parameter list of the form 'const char *, std::size_t'
+int operator""_toInt(const char* text, std::size_t length)
+{
+    return std::stoi(text);
+}
+
+int main()
+{   system("Color 0A");
+
+    auto ul = "25"_toInt;
 
     return 0;
 }

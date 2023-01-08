@@ -1,5 +1,11 @@
 #pragma once
 
+#define STROF_EXPAND(value)  #value
+#define STROF(value)         STROF_EXPAND(value)
+
+#define ISODD(val)           (1U == ((size_t) (val) & 1U))
+#define ISEVEN(val)          (0U == ((size_t) (val) & 1U))
+
 template <typename T, int N>
 auto array_len(T(&)[N])
 {
