@@ -16,39 +16,17 @@ public:
 class CottegeBuilder : public iBuilder
 {
 public:
-    std::string buildWall()
-    {
-        return "cottage wall";
-    }
-
-    std::string buildWindow()
-    {
-        return "cottage window";
-    }
-
-    std::string buildDoor()
-    {
-        return "cottage door";
-    }
+    std::string buildWall()     { return "cottage wall"; }
+    std::string buildWindow()   { return "cottage window"; }
+    std::string buildDoor()     { return "cottage door"; }
 };
 
 class HutBuilder : public iBuilder
 {
 public:
-    std::string buildWall()
-    {
-        return "hut wall";
-    }
-
-    std::string buildWindow()
-    {
-        return "hut window";
-    }
-
-    std::string buildDoor()
-    {
-        return "hut door";
-    }
+    std::string buildWall()     { return "hut wall"; }
+    std::string buildWindow()   { return "hut window"; }
+    std::string buildDoor()     { return "hut door"; }
 };
 
 class Architector

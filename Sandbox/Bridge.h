@@ -3,6 +3,9 @@
 #include <memory>
 #include <iostream>
 
+// Separate implementation from the abstraction
+// Abstraction is initialized with a reference to implementation
+
 class iOutputImpl
 {
 public:
@@ -13,19 +16,13 @@ public:
 class TVOutputImpl : public iOutputImpl
 {
 public:
-    void show() const override final
-    {
-        std::cout << "show on TV" << std::endl;
-    }
+    void show() const override final    { std::cout << "show on TV" << std::endl; }
 };
 
 class DisplayOutputImpl : public iOutputImpl
 {
 public:
-    void show() const override final
-    {
-        std::cout << "show on Cinema" << std::endl;
-    }
+    void show() const override final    { std::cout << "show on Cinema" << std::endl; }
 };
 
 class iDevice
@@ -39,11 +36,7 @@ class TV : public iDevice
 {
 public:
     TV(std::shared_ptr<iOutputImpl> impl) : m_outpuptImpl(impl) {}
-
-    void show() const override final
-    {
-        m_outpuptImpl->show();
-    }
+    void show() const override final    { m_outpuptImpl->show(); }
 
 private:
     std::shared_ptr<iOutputImpl> m_outpuptImpl;
@@ -53,11 +46,8 @@ class Display : public iDevice
 {
 public:
     Display(std::shared_ptr<iOutputImpl> impl) : m_outpuptImpl(impl) {}
+    void show() const override final    { m_outpuptImpl->show(); }
 
-    void show() const override final
-    {
-        m_outpuptImpl->show();
-    }
 private:
     std::shared_ptr<iOutputImpl> m_outpuptImpl;
 };

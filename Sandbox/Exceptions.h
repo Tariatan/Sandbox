@@ -14,21 +14,26 @@ struct mem
     }
 };
 
-struct A
+struct ExcClass
 {
     virtual void print()
     {
-        std::cout << "A::print" << std::endl;
+        std::cout << "ExcClass::print" << std::endl;
     }
 
-    A() : m(new mem())
+    ExcClass()
+    try : m(new mem())
     {
-        std::cout << "A" << std::endl;
+        std::cout << "ExcClass" << std::endl;
+    }
+    catch (std::exception & /*e*/)
+    {
+        throw;
     }
 
-    virtual ~A() noexcept(false)
+    virtual ~ExcClass() noexcept(false)
     {
-        std::cout << "~A" << std::endl;
+        std::cout << "~ExcClass" << std::endl;
         //         throw "error";
 
         delete m;
@@ -37,9 +42,9 @@ struct A
     mem* m;
 };
 
-struct B : A
+struct B : ExcClass
 {
-    virtual void print() override final
+    void print() override final
     {
         std::cout << "B::print" << std::endl;
         throw "error";

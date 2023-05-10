@@ -43,12 +43,13 @@ bool isPowerOfTwo(const int x)
     return x && !(x & (x - 1));
 }
 
-int countBits(const int x)
+int countBits(int x)
 {
     int count = 0;
-    for (int i = x; i != 0; i &= i - 1)
+    while (x)
     {
-        count++;
+        count += (x & 0xb0000'0001);
+        x >>= 1U;
     }
 
     return count;
@@ -73,3 +74,4 @@ void clearMask(char& c, const char m)
 {
     c &= ~m;
 }
+

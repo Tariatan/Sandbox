@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #define STROF_EXPAND(value)  #value
 #define STROF(value)         STROF_EXPAND(value)
 
@@ -26,3 +28,24 @@ int lcm(int x, int y)
 {
     return (x * y) / gcd(x, y);
 }
+
+enum class EFlags
+{
+    first,
+    second,
+    third,
+};
+
+template<class T = void>
+constexpr auto flags()
+{
+    return 0;
+}
+
+template<class T, class... TOtherValues>
+constexpr auto flags(T flag, TOtherValues... otherFlags)
+{
+    return static_cast<std::underlying_type_t<T>>(flag) | flags(otherFlags...);
+}
+
+const auto combinedFlags = flags(EFlags::first, EFlags::second, EFlags::third);

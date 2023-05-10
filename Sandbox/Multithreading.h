@@ -46,7 +46,7 @@ size_t calcPrime(int thCount, int first, int last)
         };
 
         std::thread t(l, start, end);
-        threads.push_back(move(t));
+        threads.push_back(std::move(t));
     }
 
     for (auto& th : threads)
@@ -93,6 +93,4 @@ void multith()
 
     std::thread t5([&](){m.DoWork(); });
     t5.join();
-
-    int b = n;
 }

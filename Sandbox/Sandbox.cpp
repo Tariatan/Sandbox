@@ -1,7 +1,3 @@
-// Sandbox.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-
 #include "UTILITIES.h"
 
 #include "Factory.h"
@@ -17,6 +13,7 @@
 #include "Multithreading.h"
 #include "Bits.h"
 #include "Sizeof.h"
+#include "Exceptions.h"
 #include "LogDuration.h"
 
 #include <sstream>
@@ -30,6 +27,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <numeric>
+#include <memory>
 
 using namespace std;
 
@@ -168,10 +166,10 @@ int romanToInt(const string& s)
     int result = 0;
     const auto len = s.length();
 
-    for (int i = 0; i < len; ++i)
+    for (size_t i = 0u; i < len; ++i)
 	{
         const char ch = s[i];
-        if(((i + 1) < len) && (numerals[ch] < numerals[s[i + 1]]))
+        if(((i + 1U) < len) && (numerals[ch] < numerals[s[i + 1U]]))
         {
             result -= numerals[ch];
         }
@@ -195,7 +193,7 @@ string intToRoman(int num)
     static const char* tens[] = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
     static const char* ones[] = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
-    string result = "";
+    string result;
     result.append(num / 1000, 'M');
     result.append(hundreds[num % 1000 / 100]);
     result.append(tens[num % 100 / 10]);
@@ -222,7 +220,7 @@ void digitSeparator()
     auto m = 1'000'000;
     m;
 }
-
+// Structured Binding
 void structuredBinding()
 {
     std::map<int, string> ctMap{ {1, "one" }, {2, "two"}, {3, "three"} };
@@ -252,13 +250,11 @@ double power(double base, int exp)
     {
         return power(base * base, exp / 2);
     }
-    else
-    {
-        return base * power(base, (exp - 1));
-    }
+
+    return base * power(base, (exp - 1));
 }
 
-void intersaction(int arr1[], int size1, int arr2[], int size2)
+void intersection(int arr1[], int size1, int arr2[], int size2)
 {
 /*
     input:
@@ -327,13 +323,9 @@ int fibonacci(int n)
     {
         return memo[n];
     }
-    else
-    {
-        // optimal substructure of overlapping subprograms
-        {
-            memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
-        }
-    }
+
+    // optimal substructure of overlapping subprograms
+    memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
 
     return memo[n];
 }
@@ -387,8 +379,8 @@ int getMinDif(int arr[], int size, int k)
 
     int smallest = arr[0] + k;
     int largest = arr[size - 1] - k;
-    int min = smallest;
-    int max = largest;
+    int min;
+    int max;
 
     for (int i = 1; i < size; ++i)
     {
@@ -448,7 +440,7 @@ string timeConvertor(string s)
 
 bool isPalindrome(const std::string& s)
 {
-    if (s.size() == 0)
+    if (s.empty() == 0)
     {
         return false;
     }
@@ -469,7 +461,7 @@ bool isPalindrome(const std::string& s)
 
 bool isAllPalindrome(const std::vector<int>& v)
 {
-    if (v.size() == 0)
+    if (v.empty() == 0)
     {
         return false;
     }
@@ -488,27 +480,26 @@ bool isAllPalindrome(const std::vector<int>& v)
 
 // Trailing return type is used to represent a fully generic return type for a+b.
 template <typename FirstType, typename SecondType>
-auto trailingReturnType(FirstType a, SecondType b) -> decltype(a + b){
+auto trailingReturnType(FirstType a, SecondType b) -> decltype(a + b)
+{
     return a + b;
 }
 
-auto CLangWarning()
+auto CLangPotentialMemoryLeakWarning()
 {
     // Potential memory leak
     //return [x = std::make_shared<std::string>()](){};
 
     // Workaround:
-    auto x = std::make_shared<std::string>();
-    return [x = std::move(x)](){};
+    auto x = std::make_unique<std::string>();
+    return x;// [x = std::move(x)] (){};
 }
 
 [[nodiscard]] int switchFallthrough(int i)
 {
-    int d = 0;
     switch (i)
     {
         case 0:
-            d = 0;
             [[fallthrough]];
         case 1:
             break;
@@ -521,7 +512,7 @@ auto CLangWarning()
 
 std::string dayOfProgrammer(int year)
 {
-    std::string result = "";
+    std::string result;
     if (year == 1918)
     {
         result = "26.09.1918";
@@ -675,29 +666,54 @@ int beautifulDays(int i, int j, int k)
     return count;
 }
 
-void logDuration()
-{
-    std::vector<int> v;
-    v.reserve(1000000);
-    {
-        LOG_DURATION("push_back");
-        for (int i = 0; i < 1000000; ++i)
-        {
-            v.push_back(i);
-        }
-    }
-}
-
 // Literal operator must have a parameter list of the form 'const char *, std::size_t'
 int operator""_toInt(const char* text, std::size_t length)
 {
+    // usage: auto ul = "25"_toInt;
     return std::stoi(text);
 }
 
-int main()
-{   system("Color 0A");
+bool isOneOfAny(std::string word, std::initializer_list<string> strings)
+{
+    // usage: isOneOfAny("word", {"hello", "world", "work"})
+    return std::any_of(strings.begin(), strings.end(), [word](const string value) { return value == word; } );
+}
 
-    auto ul = "25"_toInt;
+template<class T>
+typename std::enable_if_t< std::is_integral_v<T>, T >
+SFINAE_Div2(T t)
+{
+    return t >> 1;
+}
+
+template<class T>
+typename std::enable_if_t< std::is_floating_point_v<T>, T >
+SFINAE_Div2(T t)
+{
+    return t / 2.0;
+}
+
+int cyclicTurner(int positions, int turns, int start)
+{
+    //     352926151 380324688 94730870    => 122129406
+    //     94431605 679262176 5284458      => 23525398
+    //     208526924 756265725 150817879   => 72975907
+    //     962975336 972576181 396355184   => 405956028
+    //     464237185 937820284 255816794   => 265162707
+
+    int warn = 0;
+    int turn = (turns - 1 + start) % positions;
+    warn = (turn == 0) ? positions : turn;
+
+    return warn;
+}
+
+int main()
+{
+    LOG_DURATION("main");
+    std::ignore = system("Color 0A");
+
+
 
     return 0;
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 
 // AKA Wrapper
+// Extends existing functionality without inheritance
 
 class iDrawable
 {
@@ -14,10 +15,7 @@ public:
 class Button : public iDrawable
 {
 public:
-    void draw() override final
-    {
-        std::cout << "Draw button" << std::endl;
-    }
+    void draw() override final  { std::cout << "Draw button" << std::endl; }
 };
 
 class ButtonWrapper : public iDrawable

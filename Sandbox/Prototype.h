@@ -17,7 +17,7 @@ class Sunflower : public iClonable
 public:
     Sunflower(int quality) : m_quality(quality) {};
 
-    std::unique_ptr<iClonable> clone() const override final
+    std::unique_ptr<iClonable> clone() const final
     {
         return std::make_unique<Sunflower>(m_quality);
     }
@@ -31,7 +31,7 @@ class Corn : public iClonable
 public:
     Corn(int quality) : m_quality(quality) {};
 
-    std::unique_ptr<iClonable> clone() const override final
+    std::unique_ptr<iClonable> clone() const final
     {
         return std::make_unique<Corn>(m_quality);
     }
@@ -43,9 +43,6 @@ private:
 class Greenhouse
 {
 public:
-    Greenhouse() : m_id(0) {}
-    Greenhouse(int id) : m_id(id) {}
-
     void setPlant(std::shared_ptr<iClonable> plant)
     {
         m_plant.swap(plant);
@@ -58,7 +55,6 @@ public:
 
 private:
     std::shared_ptr<iClonable> m_plant;
-    int m_id;
 };
 
 class Farm
@@ -66,9 +62,9 @@ class Farm
 public:
     void initializeGame()
     {
-        Greenhouse g1(1);
+        Greenhouse g1;
         g1.setPlant(std::make_unique<Sunflower>(50));
-        Greenhouse g2(2);
+        Greenhouse g2;
         g2.setPlant(std::make_unique<Corn>(80));
 
         m_greenhouses.emplace_back(g1);

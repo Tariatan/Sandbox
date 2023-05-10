@@ -13,15 +13,8 @@ public:
 class SaveService : public ServiceInterface
 {
 public:
-    void init() override final
-    {
-        std::cout << "Init service" << std::endl;
-    }
-
-    void store() override final
-    {
-        std::cout << "Save to file" << std::endl;
-    }
+    void init() override final  { std::cout << "Init service" << std::endl; }
+    void store() override final { std::cout << "Save to file" << std::endl; }
 };
 
 class LazySaveServiceProxy : public ServiceInterface

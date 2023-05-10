@@ -23,18 +23,29 @@ public:
 
     VendingMachine();
 
-    void Start(unsigned int items);
-    void setState(StatePtr state);
-    StatePtr getHasCoinState();
-    StatePtr getNoCoinState();
-    StatePtr getSellState();
-    StatePtr getEmptyState();
-    void insertCoin();
-    void ejectCoin();
-    void trigger();
-    void sell();
-    unsigned int getCount() const;
-    void refill(unsigned int items);
+    void Start(unsigned int items)  { m_items = items; }
+    void setState(StatePtr state)   { m_state = state; }
+
+    StatePtr getHasCoinState()      { return m_HasCoinState; }
+    StatePtr getNoCoinState()       { return m_NoCoinState; }
+    StatePtr getSellState()         { return m_SellState; }
+    StatePtr getEmptyState()        { return m_EmptyState; }
+
+    void insertCoin()               { m_state->insertCoin(); }
+    void ejectCoin()                { m_state->ejectCoin(); }
+    void trigger()
+                                    {
+                                        m_state->trigger();
+                                        m_state->dispence();
+                                    }
+
+    void sell()                     { --m_items; }
+    unsigned int getCount() const   { return m_items; }
+    void refill(unsigned int items)
+                                    {
+                                        m_items = items;
+                                        m_state = m_NoCoinState;
+                                    }
 
 private:
     unsigned int m_items{ 0 };
