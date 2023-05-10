@@ -60,7 +60,7 @@ void reverse(int ar[], uint32_t size)
 tuple<int, int> minMax(int ar[], uint32_t size)
 {
     // { 43, 50, 0, 2, 61, 13 };
-    
+
     if (size == 0)
     {
         return { 0, 0 };
@@ -88,7 +88,7 @@ int smallest(int ar[], uint32_t size, int k)
 {
     // {7, 10, 4, 3, 20, 15}
     sort(ar, size);
-    return ar[k-1];
+    return ar[k - 1];
 }
 
 void DutchNationalFlag(int ar[], uint32_t size)
@@ -151,15 +151,15 @@ void printArray(int ar[], uint32_t size)
 
 int romanToInt(const string& s)
 {
-	if ((s.length() < 1) || (s.length() > 15))
-	{
-		return 0;
-	}
+    if ((s.length() < 1) || (s.length() > 15))
+    {
+        return 0;
+    }
 
-	if (s.find_first_not_of("IVXLCDM") != s.npos)
-	{
-		return 0;
-	}
+    if (s.find_first_not_of("IVXLCDM") != s.npos)
+    {
+        return 0;
+    }
 
     map<char, int> numerals{ {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100},{'D', 500}, {'M', 1000} };
 
@@ -167,9 +167,9 @@ int romanToInt(const string& s)
     const auto len{ s.length() };
 
     for (auto i{ 0u }; i < len; ++i)
-	{
+    {
         const char ch{ s[i] };
-        if(((i + 1U) < len) && (numerals[ch] < numerals[s[i + 1U]]))
+        if (((i + 1U) < len) && (numerals[ch] < numerals[s[i + 1U]]))
         {
             result -= numerals[ch];
         }
@@ -177,28 +177,28 @@ int romanToInt(const string& s)
         {
             result += numerals[ch];
         }
-	}
+    }
 
-	return result;
+    return result;
 }
 
 string intToRoman(int num)
 {
-	if ((num < 1) || (num > 3999))
-	{
-		return "";
-	}
+    if ((num < 1) || (num > 3999))
+    {
+        return "";
+    }
 
-    static const char* hundreds[] { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-    static const char* tens[] { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-    static const char* ones[] { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+    static const char* hundreds[]{ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+    static const char* tens[]{ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+    static const char* ones[]{ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
     string result;
     result.append(num / 1000, 'M');
     result.append(hundreds[num % 1000 / 100]);
     result.append(tens[num % 100 / 10]);
     result.append(ones[num % 10]);
-	return result;
+    return result;
 }
 
 bool contains(int item)
@@ -257,13 +257,13 @@ double power(double base, int exp)
 
 void intersection(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 {
-/*
-    input:
-    int arr1[] = { 7, 1, 5, 2, 3, 6 };
-    int arr2[] = { 3, 8, 6, 20, 7 };
-    result:
-    intersection {3, 6, 7 }
-*/
+    /*
+        input:
+        int arr1[] = { 7, 1, 5, 2, 3, 6 };
+        int arr2[] = { 3, 8, 6, 20, 7 };
+        result:
+        intersection {3, 6, 7 }
+    */
     std::vector<int> inter;
     for (auto i{ 0u }; i < size1; ++i)
     {
@@ -279,13 +279,13 @@ void intersection(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 
 void unionset(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 {
-/*
-    input:
-    int arr1[] = { 7, 1, 5, 2, 3, 6 };
-    int arr2[] = { 3, 8, 6, 20, 7 };
-    result:
-    union {1, 2, 3, 5, 6, 7, 8, 20}
-*/
+    /*
+        input:
+        int arr1[] = { 7, 1, 5, 2, 3, 6 };
+        int arr2[] = { 3, 8, 6, 20, 7 };
+        result:
+        union {1, 2, 3, 5, 6, 7, 8, 20}
+    */
     std::set<int> unionset;
     for (auto i{ 0u }; i < size1; ++i)
     {
@@ -299,10 +299,10 @@ void unionset(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 
 void rotate(int ar[], uint32_t size)
 {
-/*
-Input:  arr[] = { 1, 2, 3, 4, 5 }
-Output: arr[] = { 5, 1, 2, 3, 4 }
-*/
+    /*
+    Input:  arr[] = { 1, 2, 3, 4, 5 }
+    Output: arr[] = { 5, 1, 2, 3, 4 }
+    */
     auto tmp{ ar[size - 1u] };
     for (auto i{ size - 1u }; i > 0u; --i)
     {
@@ -361,18 +361,18 @@ int LSSP(int ar[], uint32_t size)
 // Minimize the maximum difference between the heights
 int getMinDif(int arr[], uint32_t size, int k)
 {
-/*
-    Given the heights of N towers and a value of K,
-    either increase or decrease the height of every tower by K (only once) where K > 0.
-    After modifications, the task is to minimize the difference between the heights of the longest and the shortest tower
-    and output its difference.
+    /*
+        Given the heights of N towers and a value of K,
+        either increase or decrease the height of every tower by K (only once) where K > 0.
+        After modifications, the task is to minimize the difference between the heights of the longest and the shortest tower
+        and output its difference.
 
-    Input: arr[] = {3, 9, 12, 16, 20}, k = 3
-    Output: Maximum difference is 11, arr[] = {6, 12, 9, 13, 17}
+        Input: arr[] = {3, 9, 12, 16, 20}, k = 3
+        Output: Maximum difference is 11, arr[] = {6, 12, 9, 13, 17}
 
-    The idea is to increase the first i towers by k and decrease the rest tower by k after sorting the heights,
-    then calculate the maximum height difference.
-*/
+        The idea is to increase the first i towers by k and decrease the rest tower by k after sorting the heights,
+        then calculate the maximum height difference.
+    */
     sort(arr, size);
 
     // Maximum possible height difference
@@ -539,15 +539,15 @@ std::string dayOfProgrammer(int year)
 
 int magicSquare(const std::vector<std::vector<int>> v)
 {
-//    in
-//    {{ 5, 3, 4},
-//     { 1, 5, 8 },
-//     { 6, 4, 2 } };
-//     desired at cost = 3
-//     8 3 4
-//     1 5 9
-//     6 7 2
-//
+    //    in
+    //    {{ 5, 3, 4},
+    //     { 1, 5, 8 },
+    //     { 6, 4, 2 } };
+    //     desired at cost = 3
+    //     8 3 4
+    //     1 5 9
+    //     6 7 2
+    //
 
     static const std::vector<vector<vector<int>>> vs
     {
@@ -584,9 +584,9 @@ int magicSquare(const std::vector<std::vector<int>> v)
 
 std::vector<int> climingTheLeaderboard(std::vector<int> ranked, std::vector<int> player)
 {
-//  in   std::vector<int> ranked{ 100, 100, 50, 40, 40, 20, 10 };
-//  in   std::vector<int> player{ 5, 25, 50, 120 };
-//  out 6, 4, 2, 1
+    //  in   std::vector<int> ranked{ 100, 100, 50, 40, 40, 20, 10 };
+    //  in   std::vector<int> player{ 5, 25, 50, 120 };
+    //  out 6, 4, 2, 1
 
     auto last{ std::unique(ranked.begin(), ranked.end()) };
     ranked.erase(last, ranked.end());
@@ -624,30 +624,30 @@ std::vector<int> climingTheLeaderboard(std::vector<int> ranked, std::vector<int>
 
 int grow(int n)
 {
-//        Period  Height
-//         0          1
-//         1          2
-//         2          3
-//         3          6
-//         4          7
-//         5          14
+    //        Period  Height
+    //         0          1
+    //         1          2
+    //         2          3
+    //         3          6
+    //         4          7
+    //         5          14
 
     if (n == 0)
     {
         return 1;
     }
 
-    return ((n % 2) == 0) ? grow(n - 1) + 1 : grow(n - 1)  * 2;
+    return ((n % 2) == 0) ? grow(n - 1) + 1 : grow(n - 1) * 2;
 }
 
 int beautifulDays(int i, int j, int k)
 {
-// in: i = 20, j = 23, k = 6
-// |20 - 02| / 6 = 3    => +1
-// |21 - 12| / 6 = 1.5  => +0
-// |22 - 22| / 6 = 0    => +1
-// |23 - 32| / 6 = 1.5  => +0
-// out: 2
+    // in: i = 20, j = 23, k = 6
+    // |20 - 02| / 6 = 3    => +1
+    // |21 - 12| / 6 = 1.5  => +0
+    // |22 - 22| / 6 = 0    => +1
+    // |23 - 32| / 6 = 1.5  => +0
+    // out: 2
 
     auto count{ 0u };
     for (auto day = i; day <= j; ++day)
@@ -677,7 +677,7 @@ int operator""_toInt(const char* text, std::size_t length)
 bool isOneOfAny(std::string word, std::initializer_list<string> strings)
 {
     // usage: isOneOfAny("word", {"hello", "world", "work"})
-    return std::any_of(strings.begin(), strings.end(), [word](const string value) { return value == word; } );
+    return std::any_of(strings.begin(), strings.end(), [word](const string value) { return value == word; });
 }
 
 template<class T>
