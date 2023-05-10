@@ -1,0 +1,42 @@
+====================================================
+# Sync
+----------------------------------------------------
+git fetch
+git pull
+git submodule update --rebase --init --recursive
+====================================================
+# Magic command
+----------------------------------------------------
+git clean -xfdf && git submodule foreach --recursive git clean -xfdf && git reset --hard && git submodule foreach --recursive git reset --hard && git submodule update --init --recursive && echo SUCCESS
+====================================================
+# Stage all changes to commit
+----------------------------------------------------
+git add .
+====================================================
+# Commit
+----------------------------------------------------
+git commit -m "message"
+====================================================
+# UPDATE commit
+----------------------------------------------------
+git commit --amend
+====================================================
+# UNDO commit and unstage all changes
+----------------------------------------------------
+git reset --soft head~1
+====================================================
+# Branching
+----------------------------------------------------
+git checkout master
+git branch new-branch
+git checkout new-branch
+# ...develop some code...
+git add .
+git commit –m "Some commit message"
+git checkout master
+git merge new-branch
+====================================================
+# Deleting remote branch
+----------------------------------------------------
+git push origin --delete feature/login
+====================================================
