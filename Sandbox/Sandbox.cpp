@@ -31,11 +31,11 @@
 
 using namespace std;
 
-void sort(int ar[], int size)
+void sort(int ar[], uint32_t size)
 {
-    for (auto i = 0; i < size; ++i)
+    for (auto i{ 0u }; i < size; ++i)
     {
-        for (auto j = 1; j < size; ++j)
+        for (auto j{ 1u }; j < size; ++j)
         {
             if (ar[j] < ar[j - 1])
             {
@@ -45,10 +45,10 @@ void sort(int ar[], int size)
     }
 }
 
-void reverse(int ar[], int size)
+void reverse(int ar[], uint32_t size)
 {
-    int i = 0;
-    int j = size - 1;
+    auto i{ 0u };
+    auto j{ size - 1u };
     while (i < j)
     {
         swap(ar[i], ar[j]);
@@ -57,7 +57,7 @@ void reverse(int ar[], int size)
     }
 }
 
-tuple<int, int> minMax(int ar[], int size)
+tuple<int, int> minMax(int ar[], uint32_t size)
 {
     // { 43, 50, 0, 2, 61, 13 };
     
@@ -68,7 +68,7 @@ tuple<int, int> minMax(int ar[], int size)
 
     std::pair<int, int> res{ ar[0], ar[0] };
 
-    for (int i = 1; i < size; ++i)
+    for (auto i{ 1u }; i < size; ++i)
     {
         if (ar[i] < res.first)
         {
@@ -84,21 +84,21 @@ tuple<int, int> minMax(int ar[], int size)
     return res;
 }
 
-int smallest(int ar[], int size, int k)
+int smallest(int ar[], uint32_t size, int k)
 {
     // {7, 10, 4, 3, 20, 15}
     sort(ar, size);
     return ar[k-1];
 }
 
-void DutchNationalFlag(int ar[], int size)
+void DutchNationalFlag(int ar[], uint32_t size)
 {
     //{0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1}
 
-    int b = 0;
-    int e = size - 1;
+    auto b{ 0u };
+    auto e{ size - 1u };
 
-    int anchor = 0;
+    auto anchor{ 0u };
 
     while (anchor <= e)
     {
@@ -120,12 +120,12 @@ void DutchNationalFlag(int ar[], int size)
     }
 }
 
-void negativeFirst(int ar[], int size)
+void negativeFirst(int ar[], uint32_t size)
 {
     // {-12, 11, -13, -5, 6, -7, 5, -3, -6}
 
-    int begin = 0;
-    int end = size - 1;
+    auto begin{ 0u };
+    auto end{ size - 1u };
 
     while (begin < end)
     {
@@ -141,9 +141,9 @@ void negativeFirst(int ar[], int size)
     }
 }
 
-void printArray(int ar[], int size)
+void printArray(int ar[], uint32_t size)
 {
-    for (int i = 0; i < size; ++i)
+    for (auto i{ 0u }; i < size; ++i)
     {
         std::cout << ar[i] << " ";
     }
@@ -161,14 +161,14 @@ int romanToInt(const string& s)
 		return 0;
 	}
 
-    map<char, int> numerals = { {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100},{'D', 500}, {'M', 1000} };
+    map<char, int> numerals{ {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100},{'D', 500}, {'M', 1000} };
 
-    int result = 0;
-    const auto len = s.length();
+    auto result{ 0u };
+    const auto len{ s.length() };
 
-    for (size_t i = 0u; i < len; ++i)
+    for (auto i{ 0u }; i < len; ++i)
 	{
-        const char ch = s[i];
+        const char ch{ s[i] };
         if(((i + 1U) < len) && (numerals[ch] < numerals[s[i + 1U]]))
         {
             result -= numerals[ch];
@@ -189,9 +189,9 @@ string intToRoman(int num)
 		return "";
 	}
 
-    static const char* hundreds[] = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-    static const char* tens[] = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-    static const char* ones[] = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+    static const char* hundreds[] { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+    static const char* tens[] { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+    static const char* ones[] { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
     string result;
     result.append(num / 1000, 'M');
@@ -215,11 +215,12 @@ int getMaxInt()
 
 void digitSeparator()
 {
-    auto b = 0b1100'1100;
+    auto b{ 0b1100'1100 };
     b;
-    auto m = 1'000'000;
+    auto m{ 1'000'000 };
     m;
 }
+
 // Structured Binding
 void structuredBinding()
 {
@@ -254,7 +255,7 @@ double power(double base, int exp)
     return base * power(base, (exp - 1));
 }
 
-void intersection(int arr1[], int size1, int arr2[], int size2)
+void intersection(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 {
 /*
     input:
@@ -264,9 +265,9 @@ void intersection(int arr1[], int size1, int arr2[], int size2)
     intersection {3, 6, 7 }
 */
     std::vector<int> inter;
-    for (int i = 0; i < size1; ++i)
+    for (auto i{ 0u }; i < size1; ++i)
     {
-        for (int j = 0; j < size2; ++j)
+        for (auto j{ 0u }; j < size2; ++j)
         {
             if (arr1[i] == arr2[j])
             {
@@ -276,7 +277,7 @@ void intersection(int arr1[], int size1, int arr2[], int size2)
     }
 }
 
-void unionset(int arr1[], int size1, int arr2[], int size2)
+void unionset(int arr1[], uint32_t size1, int arr2[], uint32_t size2)
 {
 /*
     input:
@@ -286,28 +287,28 @@ void unionset(int arr1[], int size1, int arr2[], int size2)
     union {1, 2, 3, 5, 6, 7, 8, 20}
 */
     std::set<int> unionset;
-    for (int i = 0; i < size1; ++i)
+    for (auto i{ 0u }; i < size1; ++i)
     {
         unionset.emplace(arr1[i]);
     }
-    for (int i = 0; i < size2; ++i)
+    for (auto i{ 0u }; i < size2; ++i)
     {
         unionset.emplace(arr2[i]);
     }
 }
 
-void rotate(int ar[], int size)
+void rotate(int ar[], uint32_t size)
 {
 /*
 Input:  arr[] = { 1, 2, 3, 4, 5 }
 Output: arr[] = { 5, 1, 2, 3, 4 }
 */
-    int tmp = ar[size - 1];
-    for (int i = size - 1; i > 0; --i)
+    auto tmp{ ar[size - 1u] };
+    for (auto i{ size - 1u }; i > 0u; --i)
     {
-        ar[i] = ar[i - 1];
+        ar[i] = ar[i - 1u];
     }
-    ar[0] = tmp;
+    ar[0u] = tmp;
 }
 
 std::unordered_map<int, int> memo;
@@ -331,15 +332,15 @@ int fibonacci(int n)
 }
 
 // Largest Subarray Sum Problem (Kadane’s Algorithm)
-int LSSP(int ar[], int size)
+int LSSP(int ar[], uint32_t size)
 {
     //                 /                \
     // input: { -2, -3, 4, -1, -2, 1, 5, -3 };
     // output: 7
-    int max_sum_so_far = std::numeric_limits<int>::min();
-    int max_sum_ending_here = 0;
+    int max_sum_so_far{ std::numeric_limits<int>::min() };
+    int max_sum_ending_here{ 0 };
 
-    for (int i = 0; i < size; ++i)
+    for (auto i{ 0u }; i < size; ++i)
     {
         max_sum_ending_here += ar[i];
 
@@ -348,9 +349,9 @@ int LSSP(int ar[], int size)
             max_sum_so_far = max_sum_ending_here;
         }
 
-        if (max_sum_ending_here < 0)
+        if (max_sum_ending_here < 0u)
         {
-            max_sum_ending_here = 0;
+            max_sum_ending_here = 0u;
         }
     }
 
@@ -358,7 +359,7 @@ int LSSP(int ar[], int size)
 }
 
 // Minimize the maximum difference between the heights
-int getMinDif(int arr[], int size, int k)
+int getMinDif(int arr[], uint32_t size, int k)
 {
 /*
     Given the heights of N towers and a value of K,
@@ -375,14 +376,14 @@ int getMinDif(int arr[], int size, int k)
     sort(arr, size);
 
     // Maximum possible height difference
-    int ans = arr[size - 1] - arr[0];
+    int ans{ arr[size - 1u] - arr[0u] };
 
-    int smallest = arr[0] + k;
-    int largest = arr[size - 1] - k;
+    int smallest{ arr[0u] + k };
+    int largest{ arr[size - 1u] - k };
     int min;
     int max;
 
-    for (int i = 1; i < size; ++i)
+    for (auto i{ 1u }; i < size; ++i)
     {
         // If on subtracting k we got
         // negative then continue
@@ -412,10 +413,10 @@ string timeConvertor(string s)
 {
     //string s = "12:05:45AM";
 
-    bool isPM = s.substr(s.size() - 2) == "PM";
-    int HH = std::stoi(s.substr(0, 2));
-    int MM = std::stoi(s.substr(3, 2));
-    int SS = std::stoi(s.substr(6, 2));
+    bool isPM{ s.substr(s.size() - 2) == "PM" };
+    int HH{ std::stoi(s.substr(0, 2)) };
+    int MM{ std::stoi(s.substr(3, 2)) };
+    int SS{ std::stoi(s.substr(6, 2)) };
 
     if (isPM)
     {
@@ -432,7 +433,7 @@ string timeConvertor(string s)
         }
     }
 
-    const int buf_len = 9;
+    const int buf_len{ 9 };
     char buf[buf_len];
     std::snprintf(buf, buf_len, "%0.2d:%0.2d:%0.2d", HH, MM, SS);
     return buf;
@@ -445,8 +446,8 @@ bool isPalindrome(const std::string& s)
         return false;
     }
 
-    auto itB = s.begin();
-    auto itE = s.end() - 1;
+    auto itB{ s.begin() };
+    auto itE{ s.end() - 1 };
 
     for (; itB < itE; ++itB, --itE)
     {
@@ -466,7 +467,7 @@ bool isAllPalindrome(const std::vector<int>& v)
         return false;
     }
 
-    for (auto el : v)
+    for (const auto el : v)
     {
         std::string s{ std::to_string(el) };
         if (!isPalindrome(s))
@@ -519,7 +520,7 @@ std::string dayOfProgrammer(int year)
     }
     else
     {
-        bool isLeap = false;
+        bool isLeap{ false };
         if (year < 1918)
         {
             isLeap = (year % 4 == 0);
@@ -560,13 +561,13 @@ int magicSquare(const std::vector<std::vector<int>> v)
         {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}},
     };
 
-    int min_cost = std::numeric_limits<int>::max();
-    for (auto matrix : vs)
+    auto min_cost{ std::numeric_limits<uint32_t>::max() };
+    for (const auto& matrix : vs)
     {
-        int cost = 0;
-        for (int row = 0; row < 3; ++row)
+        auto cost{ 0u };
+        for (auto row{ 0u }; row < 3u; ++row)
         {
-            for (int col = 0; col < 3; ++col)
+            for (auto col{ 0u }; col < 3u; ++col)
             {
                 cost += std::abs((matrix[row][col] - v[row][col]));
             }
@@ -587,11 +588,11 @@ std::vector<int> climingTheLeaderboard(std::vector<int> ranked, std::vector<int>
 //  in   std::vector<int> player{ 5, 25, 50, 120 };
 //  out 6, 4, 2, 1
 
-    auto last = std::unique(ranked.begin(), ranked.end());
+    auto last{ std::unique(ranked.begin(), ranked.end()) };
     ranked.erase(last, ranked.end());
 
     std::map<int, int> leaders;
-    int pos = 1;
+    int pos{ 1 };
     for (auto rank : ranked)
     {
         leaders[rank] = pos++;
@@ -602,7 +603,7 @@ std::vector<int> climingTheLeaderboard(std::vector<int> ranked, std::vector<int>
 
     for (auto score : player)
     {
-        auto it = leaders.lower_bound(score);
+        auto it{ leaders.lower_bound(score) };
 
         if (it == leaders.end())
         {
@@ -648,14 +649,14 @@ int beautifulDays(int i, int j, int k)
 // |23 - 32| / 6 = 1.5  => +0
 // out: 2
 
-    int count = 0;
-    for (int day = i; day <= j; ++day)
+    auto count{ 0u };
+    for (auto day = i; day <= j; ++day)
     {
         std::string num = std::to_string(day);
         std::reverse(num.begin(), num.end());
-        int r_day = std::stoi(num);
+        auto r_day{ std::stoi(num) };
 
-        int diff = std::abs(day - r_day);
+        auto diff{ std::abs(day - r_day) };
 
         if ((diff % k) == 0)
         {
@@ -701,8 +702,8 @@ int cyclicTurner(int positions, int turns, int start)
     //     962975336 972576181 396355184   => 405956028
     //     464237185 937820284 255816794   => 265162707
 
-    int warn = 0;
-    int turn = (turns - 1 + start) % positions;
+    auto warn{ 0u };
+    auto turn{ (turns - 1 + start) % positions };
     warn = (turn == 0) ? positions : turn;
 
     return warn;
@@ -712,8 +713,6 @@ int main()
 {
     LOG_DURATION("main");
     std::ignore = system("Color 0A");
-
-
 
     return 0;
 }
